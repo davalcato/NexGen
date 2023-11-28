@@ -8,40 +8,51 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @State private var isLoginViewPresented = false
+    
     var body: some View {
-        VStack {
-            Text("Welcome to NexGen Assist")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding()
-            
-            GeometryReader { geometry in
-                Image("Board") // Replace "Board" with your own image asset
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8) // Adjust size as needed
-                    .background(Color.clear)
+        NavigationView {
+            VStack {
+                Spacer()
+                
+                Text("Welcome to NexGen Assist")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                     .padding()
-            }
-            
-            Text("Get started with NexGen Assist, the ultimate business optimization tool.")
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            // Add additional components or instructions here
-            
-            Button(action: {
-                // Action when the user taps the button to continue
-                // This could navigate to the next screen or dismiss the onboarding
-            }) {
-                Text("Get Started")
-                    .fontWeight(.semibold)
+                
+                Spacer()
+                
+                GeometryReader { geometry in
+                    Image("Board") // Replace "Board" with your own image asset
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8) // Adjust size as needed
+                        .background(Color.clear)
+                        .padding()
+                }
+                
+                Spacer()
+                
+                Text("Get started with NexGen Assist, the ultimate business optimization tool.")
+                    .multilineTextAlignment(.center)
                     .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
+                
+                Button(action: {
+                    isLoginViewPresented.toggle()
+                }) {
+                    Text("Get Started")
+                        .fontWeight(.semibold)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+                .padding()
+                .sheet(isPresented: $isLoginViewPresented) {
+                    LoginView()
+                }
             }
-            .padding()
+            .navigationBarHidden(true) // Hide the navigation bar
         }
     }
 }
@@ -49,5 +60,12 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
+    }
+}
+
+struct LoginView: View {
+    var body: some View {
+        Text("Login Page") // Placeholder text for the login page
+            .navigationBarTitle("Login", displayMode: .inline)
     }
 }
