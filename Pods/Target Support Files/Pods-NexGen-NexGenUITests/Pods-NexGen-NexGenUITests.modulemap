@@ -1,0 +1,6 @@
+framework module Pods_NexGen_NexGenUITests {
+  umbrella header "Pods-NexGen-NexGenUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
