@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isLoginViewPresented = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -24,7 +26,7 @@ struct ContentView: View {
                     Image("Board") // Replace "Board" with your own image asset
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8)
+                        .frame(width: geometry.size.width * 0.8, height: geometry.size.width * 0.8) // Adjust size as needed
                         .background(Color.clear)
                         .padding()
                 }
@@ -35,7 +37,9 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 
-                NavigationLink(destination: LoginPage()) {
+                Button(action: {
+                    isLoginViewPresented.toggle()
+                }) {
                     Text("Get Started")
                         .fontWeight(.semibold)
                         .padding()
@@ -44,6 +48,9 @@ struct ContentView: View {
                         .cornerRadius(8)
                 }
                 .padding()
+                .sheet(isPresented: $isLoginViewPresented) {
+                    LoginView()
+                }
             }
             .navigationBarHidden(true) // Hide the navigation bar
         }
