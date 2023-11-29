@@ -49,7 +49,7 @@ struct OnboardingView: View {
                 }
                 .padding()
                 .sheet(isPresented: $isLoginViewPresented) {
-                    LoginView()
+                    LoginView(showLogin: $isLoginViewPresented)
                 }
             }
             .navigationBarHidden(true) // Hide the navigation bar
@@ -60,12 +60,5 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
-    }
-}
-
-struct LoginView: View {
-    var body: some View {
-        Text("Login Page") // Placeholder text for the login page
-            .navigationBarTitle("Login", displayMode: .inline)
     }
 }

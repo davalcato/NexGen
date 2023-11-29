@@ -49,7 +49,7 @@ struct ContentView: View {
                 }
                 .padding()
                 .sheet(isPresented: $isLoginViewPresented) {
-                    LoginView()
+                    LoginView(showLogin: $isLoginViewPresented)
                 }
             }
             .navigationBarHidden(true) // Hide the navigation bar
